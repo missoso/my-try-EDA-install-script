@@ -100,6 +100,9 @@ Launch the container lab topology and use the integrate command to connect it to
 
 
 # (Optional) Add LLm key to EDA
+https://platform.openai.com
+
+https://platform.openai.com/api-keys
 
 ```bash
 kubectl get engineconfigs.core.eda.nokia.com engine-config -n eda-system -o yaml > cfgfull.txt
