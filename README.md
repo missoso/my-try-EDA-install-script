@@ -1,11 +1,20 @@
 # my-try-EDA-install-script
 
-Goal is to install EDA in the fastest way possible and link it with a LLM key (from open.ai) and with the clab connector thus allowing a container lab topology to be connected directly to the EDA instance
+Goal is to install EDA and link it with the clab connector thus allowing a container lab topology to be connected directly to the EDA instance.
+
+During the EDA installation it is possible to add the LLM key directly into the installation process, but it can be added afterwards with a serie of commands also detailed in this repository.
 
 1 - Try-EDA with a fine tune to allow it to work with the Containerlab EDA Connector Tool
+
 2 - Install kubectl (if not already installed)
-3 - EDA license
+
+3 - Add the EDA license
+
 4 - Containerlab EDA Connector Tool instalation
+
+5 - Connect a containerlab tpology to EDA
+
+6 - (optional) Add a LLM key to EDA
 
  
 
@@ -31,7 +40,7 @@ https://kubernetes.io/docs/tasks/tools/
 
 # Install the EDA license
 
-In the following file edit the name and add the license on a single line to the field "data" and paste the file contantents in the  CLI
+In the following file edit the "name" (optional) and add the license on a single line to the field "data" and paste the file contantents in the  CLI
 
 ```bash
 cat << 'EOF' | kubectl apply -f -
@@ -79,14 +88,40 @@ https://github.com/eda-labs/clab-connector
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-Use the integrate option with the paramaentes 
+Launch the container lab topology and use the integrate command to connect it to EDA (you will need the path to the topology-data.json file of the container lab topology created)
 
 ```bash
 :~/eda-topologies$ clab-connector integrate \
-  --topology-data $path to the topology-data.json file of the container lab topology that is to be integrated\
+  --topology-data $path to the topology-data.json \
   --eda-url https://$EDA_IP$:9443 \
   --eda-user $user \
   --eda-password $password
 ```
 
+
+# (Optional) Add LLm key to EDA
+
+```bash
+kubectl get engineconfigs.core.eda.nokia.com engine-config -n eda-system -o yaml > cfgfull.txt
+
+Open the file above and look for 
+
+llm:
+    apiKey: ""
+    model: gpt-4o
+
+Add the key to the field above
+
+
+kubectl apply -f cfgfull.txt
+
+kubectl get pods -n eda-system | grep eda-ce- # get the pod number
+
+kubectl delete pod eda-ce-xxxxxxxx -n eda-system 
+
+kubectl get pods -A
+
+kubectl get engineconfigs.core.eda.nokia.com engine-config -n eda-system -o yaml | grep -i LLM -A 10
+
+```
 
