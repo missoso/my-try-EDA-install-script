@@ -2,7 +2,7 @@
 
 Goal is to install EDA and link it with the clab connector thus allowing a container lab topology to be connected directly to the EDA instance.
 
-During the EDA installation it is possible to add the LLM key directly into the installation process, but it can also be added afterwards with a series of commands also detailed in this repository.
+During the EDA installation it is possible to add the LLM key directly during the installation process, but it can also be added afterwards with a series of commands also detailed in this repository.
 
 1 - Try-EDA with a fine tune to allow it to work with the Containerlab EDA Connector Tool
 
