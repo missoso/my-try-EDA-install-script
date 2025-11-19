@@ -2,7 +2,7 @@
 
 Goal is to install EDA and link it with the clab connector thus allowing a container lab topology to be connected directly to the EDA instance.
 
-During the EDA installation it is possible to add the LLM key directly into the installation process, but it can be added afterwards with a serie of commands also detailed in this repository.
+During the EDA installation it is possible to add the LLM key directly into the installation process, but it can also be added afterwards with a series of commands also detailed in this repository.
 
 1 - Try-EDA with a fine tune to allow it to work with the Containerlab EDA Connector Tool
 
@@ -10,11 +10,11 @@ During the EDA installation it is possible to add the LLM key directly into the 
 
 3 - Add the EDA license
 
-4 - Containerlab EDA Connector Tool instalation
+4 - Containerlab EDA Connector Tool installation
 
-5 - Connect a containerlab tpology to EDA
+5 - Connect a containerlab topology to EDA
 
-6 - (optional) Add a LLM key to EDA
+6 - (optional) Add a LLM key to EDA after the installation 
 
  
 
@@ -22,7 +22,7 @@ During the EDA installation it is possible to add the LLM key directly into the 
 
 https://docs.eda.dev/25.8/getting-started/try-eda/#try-eda
 
-But before you run the "make-eda" (the final step after all the downloads are done) there is one step required so that it will work with the clab connector 
+But before running the "make-eda" (the final step after all the downloads) there is one step required so that it will work with the clab connector 
 
 Edit the prefs.mk and set simulate to false ! 
 
@@ -40,7 +40,7 @@ https://kubernetes.io/docs/tasks/tools/
 
 # Install the EDA license
 
-In the following file edit the "name" (optional) and add the license on a single line to the field "data" and paste the file contantents in the  CLI
+In the following file edit the "name" (optional) and add the license on a single line to the field "data" and paste the file contents in the  CLI
 
 ```bash
 cat << 'EOF' | kubectl apply -f -
@@ -55,7 +55,7 @@ spec:
 EOF
 ```
 
-confirm it is applied
+Confirm it is applied
 
 ```bash
 :~/playground$ kubectl get -n eda-system license
@@ -88,7 +88,7 @@ https://github.com/eda-labs/clab-connector
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-Launch the container lab topology and use the integrate command to connect it to EDA (you will need the path to the topology-data.json file of the container lab topology created)
+Launch the container lab topology and use the integrate command to connect it to EDA (requires the path to the topology-data.json file of the container lab topology created)
 
 ```bash
 :~/eda-topologies$ clab-connector integrate \
